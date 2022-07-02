@@ -10,7 +10,8 @@ import { HttpService } from './http.service'
 })
 export class AppComponent implements OnInit {
   title = 'appFrontEnd';
-  data!: string;
+  data!: any;
+
   @ViewChild("myOutput") myOutput!: ElementRef;
 
   constructor(private http : HttpService) { }
@@ -19,7 +20,12 @@ export class AppComponent implements OnInit {
 
   }
   
-  getParameter() {
-    this.http.getTest("");//((data) => console.log(data));
+  getParameter() 
+  {
+    this.http.getTest("massimo").subscribe(
+      (response) => { this.data = response; console.log(this.data); },
+      (error) => { console.log("sono entrato");console.log(error); }
+    );
+    
   }
 }
